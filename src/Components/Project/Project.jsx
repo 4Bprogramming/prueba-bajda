@@ -5,6 +5,7 @@ import "../lib/ionicons/css/ionicons.min.css";
 import "../lib/owlcarousel/assets/owl.carousel.min.css";
 import "../lib/bootstrap/css/bootstrap.min.css";
 import "../css/style.css";
+import fotito from '../../img/102.jpg'
 
 import { db } from "../../firebase/credential";
 import {
@@ -19,32 +20,54 @@ import { uid } from "uid";
 import { Link, useParams } from "react-router-dom";
 
 function Project() {
+
   console.log("entreeeeeeeee");
   const [projects, setProjects] = useState([]);
-  const  id = uid();
-  const fetchProjectId = () => {
-    console.log("One Project");
+  const  idParams = useParams();
 
-    var withdrawRef = query(ref(db, `/projects/`), id);
-    onValue(withdrawRef, (snapshot) => {
-      const data = snapshot.val();
-      if (data !== null) {
-        setProjects([]);
-        Object.values(data).map((project) => {
-          setProjects((oldArray) => [project.id]);
-        });
-      }
-    });
-  };
-  const projectId = (project) => {
-    remove(ref(db, `/projects/${project.id}`));
-}
+
+//   const fetchProjectId = () => {
+// console.log(idParams, "aca el id");
+//     var withdrawRef = query(ref(db, `/projects/`));
+//     onValue(withdrawRef, (snapshot) => {
+//       const data = snapshot.val();
+//       if (data !== null) {
+//         setProjects([]);
+//         Object.values(data).map((project) => {
+          
+//           setProjects((project) => [project]);
+//           console.log(data,"aca viene la data");
+//         });
+//       }
+//     });
+//   };
+
+const fetchUser = () => {
+  console.log("Fetching all Users");
+
+  var withdrawRef = query(ref(db, `/projects/`), orderByKey());
+  onValue(withdrawRef, (snapshot) => {
+    const data = snapshot.val();
+    if (data !== null) {
+      setProjects([]);
+      Object.values(data).map((project) => {
+          // setProjects(data.id);
+        setProjects((oldArray) => [...oldArray, project]);
+      });
+    }
+  });
+};const oneProject = projects.filter((project) => project.id === idParams.id )
+
 
   useEffect(() => {
-    fetchProjectId();
+    fetchUser();
   }, []);
 
-  console.log(fetchProjectId, "proyectos");
+
+// const oneProject = projects.find(({id}) => id === id)
+
+// const oneProject = fetchProjectId.filter((project) => project.id == idParams)
+  console.log(oneProject, "proyecto");
   return (
   <div>
     {/* TITULO */}
@@ -53,11 +76,102 @@ function Project() {
       <div class="row">
         <div class="col-md-12 col-lg-8">
           <div class="title-single-box">
-            <h1 class="title-single">Arelauquen Lodge</h1>
-            <span class="color-text-a">Reserva Natural Arelauquen Golf & Spa Country Club</span>
+            <h1 class="title-single">{oneProject[0]?.title}</h1>
+            <span class="color-text-a">{oneProject[0]?.place}</span>
           </div>
         </div>
+        <section class="property-single nav-arrow-b">
+
+        <div class="container">
+      <div class="row">
+        <div class="col-sm-12">
+          <div id="property-single-carousel" class="owl-carousel owl-arrow gallery-property">
+            <div class="carousel-item-b">
+            <div class="carousel-item-b">
+              <img src={fotito} alt=""/>
+            </div>
+            <div class="carousel-item-b">
+              <img src={fotito} alt=""/>
+            </div>
+
+              {/* <img src={fotito} alt="" height="200px" width="500px"/> */}
+            </div>
+             
+</div>
+<div class="desription-place">
+          <div class="row justify-content-between">
+            <div class="col-md-5 col-lg-4">
+              <div class="property-summary">
+                <div class="row">
+                  <div class="col-sm-12">
+                    <div class="title-box-d section-t4">
+                      <h3 class="title-d">Detalles</h3>
+                    </div>
+                  </div>
+                </div>
+                <div class="summary-list">
+                  <ul class="list">
+                    <li class="d-flex justify-content-between">
+                      <strong>Ubicación:</strong>
+                      <span>{oneProject[0]?.place}</span>
+                    </li>
+                    <li class="d-flex justify-content-between">
+                      <strong>Tipo:</strong>
+                      <span>{oneProject[0]?.type}</span>
+                    </li>
+                    <li class="d-flex justify-content-between">
+                      <strong>Area:</strong>
+                      <span>{oneProject[0]?.area}m
+                        <sup>2</sup>
+                      </span>
+                    </li>
+                    <li class="d-flex justify-content-between">
+                      <strong>Cuartos:</strong>
+                      <span>{oneProject[0]?.rooms}</span>
+                    </li>
+                    <li class="d-flex justify-content-between">
+                      <strong>Baños:</strong>
+                      <span>{oneProject[0]?.bathrooms}</span>
+                    </li>
+                    <li class="d-flex justify-content-between">
+                      <strong>Garage:</strong>
+                      <span>{oneProject[0]?.garage}</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-7 col-lg-7 section-md-t3">
+              <div class="row">
+                <div class="col-sm-12">
+                  <div class="title-box-d">
+                    <h3 class="title-d">Descripción</h3>
+                  </div>
+                </div>
+              </div>
+              <div class="property-description">
+                <p class="description color-text-a">
+                {oneProject[0]?.description}
+                </p>
+                <p class="description color-text-a no-margin">
+               
+                </p>
+              </div>
+             
+            </div>
+          </div>
+        </div>
+        </div>
         
+</div>
+</div>
+
+
+
+        </section>
+
+
+
       </div>
     </div>
   </section>

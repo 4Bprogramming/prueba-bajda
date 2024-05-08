@@ -21,54 +21,7 @@ import {
 } from "firebase/database";
 
 function Form() {
-  //   const [input, setInput] = useState({
-  //     title: "",
-  //     description: "",
-  //     image: "",
-  //     place: "",
-  //     type: "",
-  //     area: "",
-  //     rooms: "",
-  //     bathrooms: "",
-  //     garage: "",
-  //     images: "",
-  //     year: "",
-  //   });
-
-  //   const createProject = async (e) => {
-  //     e.preventDefault(e);
-  //     await addDoc(collection(db, "projects"), {
-  //       text: input,
-  //     //   {
-  //     //     title:,
-  //     //     description: "",
-  //     //     image: "",
-  //     //     place: "",
-  //     //     type: "",
-  //     //     area: "",
-  //     //     rooms: "",
-  //     //     bathrooms: "",
-  //     //     garage: "",
-  //     //     images: "",
-  //     //     year: "",
-  //     //   },
-  //       completed: true,
-  //     });
-  //     console.log(input,"aca el documento")
-  //     setInput({
-  //       title: "",
-  //       description: "",
-  //       image: "",
-  //       place: "",
-  //       type: "",
-  //       area: "",
-  //       rooms: "",
-  //       bathrooms: "",
-  //       garage: "",
-  //       images: "",
-  //       year: "",
-  //     });
-  //   };
+  
   const [showError, setError] = useState("");
   const [projects, setProjects] = useState([]);
   const [title, setTitle] = useState();

@@ -21,6 +21,7 @@ import { Link } from "react-router-dom";
 function Projects() {
   const [projects, setProjects] = useState([]);
 const id = uid()
+
   const fetchUser = () => {
     console.log("Fetching all Users");
 
@@ -38,6 +39,7 @@ const id = uid()
   useEffect(() => {
     fetchUser();
   }, []);
+  console.log();
   return (
     <div>
       <section class="intro-single">
@@ -90,7 +92,7 @@ const id = uid()
                       </h2>
                     </div>
                     <div class="card-body-a">
-                      <Link to={`/project/${id}`} class="link-a">
+                      <Link to={`/project/${project.id}`} class="link-a">
                         ver
                         <span class="ion-ios-arrow-forward"></span>
                       </Link>
