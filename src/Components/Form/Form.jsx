@@ -51,7 +51,7 @@ function Form() {
     } catch (error) {
       console.log("Error image");
     }
-    setImage(e.target.value);
+    // setImage(e.target.value);
   };
 
   const handlePlace = (e) => {
@@ -134,8 +134,8 @@ function Form() {
         bathrooms,
         description,
         garage,
-        image,
-        images,
+        image:"",
+        images:"",
         place,
         rooms,
         title,
