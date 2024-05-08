@@ -1,18 +1,26 @@
-import './App.css';
-import About from './Components/About/About';
-import Contact from './Components/Contact/Contact';
-import Footer from './Components/Footer/Footer';
-import Home from './Components/Home/Home'
-import Navbar from './Components/Navbar/Navbar';
+import "./App.css";
+
+import Navbar from "./Components/Navbar/Navbar";
+import Projects from "./Components/Projects/Projects";
+import { Route, Routes } from "react-router-dom";
+import Principal from "./Principal";
 
 function App() {
   return (
-    <div >
-     <Navbar /> 
+    <div>
+      <Routes>
+        <Route exact path="/" element={<Principal />} />
+        <Route path="/project" element={<Projects />} />
+        <Route path="/project/:id" element={<Projects />} />
+      </Routes>
+
+      {/* <Navbar /> 
      <Home />
      <About />
      <Contact />
      <Footer />
+
+     <Form /> */}
     </div>
   );
 }

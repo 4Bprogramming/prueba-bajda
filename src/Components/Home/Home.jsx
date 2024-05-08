@@ -6,6 +6,7 @@ import "../lib/ionicons/css/ionicons.min.css";
 import "../lib/owlcarousel/assets/owl.carousel.min.css";
 import "../lib/bootstrap/css/bootstrap.min.css";
 import "../css/style.css";
+import { Link } from "react-router-dom";
 
 function Home() {
   return (
@@ -21,9 +22,9 @@ function Home() {
      
 
       <div class="div-button">
-        <a class="nav-link" href="#">
+        <Link class="nav-link" to="/project">
           <button class="btn-place"> PROYECTOS </button>
-        </a>
+        </Link>
       </div>
       <a
         href="https://api.whatsapp.com/send?phone=56&text=Hola%21%20Quisiera%20m%C3%A1s%20informaci%C3%B3n%20sobre%20Varela%202."
