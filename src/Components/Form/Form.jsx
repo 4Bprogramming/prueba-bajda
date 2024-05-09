@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./Form.css";
 import { uid } from "uid";
 // import {
-//   query,
+//   // query,
 //   collection,
 //   onSnapshot,
 //   updateDoc,
@@ -20,8 +20,15 @@ import {
   remove,
 } from "firebase/database";
 
+
+
+
+
 function Form() {
   
+
+
+
   const [showError, setError] = useState("");
   const [projects, setProjects] = useState([]);
   const [title, setTitle] = useState();
@@ -191,6 +198,8 @@ function Form() {
     fetchUser();
   }, []);
 
+
+
   return (
     <div>
       <section className="form-register">
@@ -307,6 +316,7 @@ function Form() {
             value="Registrar"
           />
         </form>
+
       </section>
     </div>
   );

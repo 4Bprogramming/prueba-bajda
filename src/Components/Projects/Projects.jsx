@@ -39,7 +39,7 @@ const id = uid()
   useEffect(() => {
     fetchUser();
   }, []);
-  console.log();
+  console.log("*********proyectos*******************",projects);
   return (
     <div>
       <section class="intro-single">
