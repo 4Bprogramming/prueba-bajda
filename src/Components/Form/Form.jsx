@@ -33,7 +33,7 @@ function Form() {
   const [rooms, setRooms] = useState();
   const [bathrooms, setBathrooms] = useState();
   const [garage, setGarage] = useState();
-  const [images, setImages] = useState();
+  const [images, setImages] = useState([]);
   const [year, setYear] = useState();
 
   const handleTitle = (e) => {
@@ -52,8 +52,8 @@ function Form() {
       console.log("Error image");
     }
     // setImage(e.target.value);
+    console.log("imagenes==>",image);
   };
-
   const handlePlace = (e) => {
     setPlace(e.target.value);
   };
@@ -80,12 +80,14 @@ function Form() {
 
   const handleImgs = async (e) => {
     try {
+      console.log("e==>",e);
       let urls = await uploadFile(e);
       setImages(urls);
     } catch (error) {
       console.log("Error image");
     }
   };
+  console.log('varias imagenes==>', images);
 
   const handleYear = (e) => {
     setYear(e.target.value);
@@ -97,7 +99,7 @@ function Form() {
     setDescription("");
     setGarage("");
     setImage("");
-    setImages("");
+    setImages([]);
     setPlace("");
     setRooms("");
     setTitle("");
@@ -134,14 +136,27 @@ function Form() {
         bathrooms,
         description,
         garage,
-        image:"",
-        images:"",
+        image,
+        images,
         place,
         rooms,
         title,
         type,
         year,
       });
+      // console.log("envío===>",{
+      //   area,
+      //   bathrooms,
+      //   description,
+      //   garage,
+      //   image,
+      //   images,
+      //   place,
+      //   rooms,
+      //   title,
+      //   type,
+      //   year,})
+
       resetFields();
     } else {
       setError("Introduzca sus datos");
@@ -264,7 +279,7 @@ function Form() {
           <input
             className="controls"
             type="file"
-            value={image}
+            // value={image}
             accept="image/*"
             name="imagePrincipal"
             placeholder="Portada"
@@ -275,11 +290,12 @@ function Form() {
           <input
             className="controls"
             type="file"
-            value={images}
+            // value={images}
             name="image"
             accept="image/*"
             placeholder="Imagenes"
             onChange={handleImgs}
+            multiple
           />
 
           <input
