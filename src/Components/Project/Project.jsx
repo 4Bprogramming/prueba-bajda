@@ -18,6 +18,8 @@ import {
 import { uid } from "uid";
 import { Link, useParams } from "react-router-dom";
 import fotito from "../../img/102.jpg";
+// import Carrousell from "./Carrousell";
+import CarrouselReact from "./CarrouselReact";
 
 function Project() {
   const [projects, setProjects] = useState([]);
@@ -43,7 +45,7 @@ function Project() {
   useEffect(() => {
     fetchUser();
   }, []);
-  console.log(oneProject, "aca el array de imagenes");
+  console.log(oneProject, "ONEPROYECT");
 
   return (
     <div>
@@ -65,10 +67,10 @@ function Project() {
         <div class="container">
           <div class="row">
             <div class="col-sm-12">
-
+<CarrouselReact  images = {oneProject[0]?.images} />
 {/* 
 aca comienza */}
-<div className="carousel1">
+{/* <div className="carousel1">
 <div id="slider1">
 					  <figure>
             {oneProject[0]?.images?.map((e, index) => (
@@ -76,7 +78,8 @@ aca comienza */}
               ))} 
 					  </figure>
 				</div>
-        </div>
+        </div> */}
+        {/* <Carrousell/> */}
 {/* 
   aca termina          */}
     {/* {oneProject[0]?.images?.map((e, index) => (

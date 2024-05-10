@@ -34,6 +34,22 @@ function Form() {
   const [garage, setGarage] = useState();
   const [images, setImages] = useState([]);
   const [year, setYear] = useState();
+  const uuid = uid()
+  const infoSend={
+    id: uuid,
+        area,
+        bathrooms,
+        description,
+        garage,
+        image,
+        images,
+        place,
+        rooms,
+        title,
+        type,
+        year,
+
+  }
 
   const handleTitle = (e) => {
     setTitle(e.target.value);
@@ -146,35 +162,11 @@ function Form() {
     }
   }
 
+  console.log("envío===>",infoSend)
   const handleProject = (e) => {
-    const uuid = uid();
+    ;
     if (isValidate()) {
-      set(ref(db, `/projects/${uuid}`), {
-        id: uuid,
-        area,
-        bathrooms,
-        description,
-        garage,
-        image,
-        images,
-        place,
-        rooms,
-        title,
-        type,
-        year,
-      });
-      // console.log("envío===>",{
-      //   area,
-      //   bathrooms,
-      //   description,
-      //   garage,
-      //   image,
-      //   images,
-      //   place,
-      //   rooms,
-      //   title,
-      //   type,
-      //   year,})
+      set(ref(db, `/projects/${uuid}`), infoSend);
 
       resetFields();
     } else {
