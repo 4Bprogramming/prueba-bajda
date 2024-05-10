@@ -5,6 +5,7 @@ import "../lib/ionicons/css/ionicons.min.css";
 import "../lib/owlcarousel/assets/owl.carousel.min.css";
 import "../lib/bootstrap/css/bootstrap.min.css";
 import "../css/style.css";
+import './Project.css'
 import { db } from "../../firebase/credential";
 import {
   ref,
@@ -42,6 +43,7 @@ function Project() {
   useEffect(() => {
     fetchUser();
   }, []);
+  console.log(oneProject, "aca el array de imagenes");
 
   return (
     <div>
@@ -64,25 +66,23 @@ function Project() {
           <div class="row">
             <div class="col-sm-12">
 
-          <img src={oneProject[0]?.images}  alt="" />
+{/* 
+aca comienza */}
+<div className="carousel1">
+<div id="slider1">
+					  <figure>
+            {oneProject[0]?.images?.map((e, index) => (
+                <img src={e} alt="" key={index}  />
+              ))} 
+					  </figure>
+				</div>
+        </div>
+{/* 
+  aca termina          */}
+    {/* {oneProject[0]?.images?.map((e, index) => (
+                <img src={e} alt="" key={index} width="300px" />
+              ))} */}
 
-              <div
-                id="property-single-carousel"
-                class="owl-carousel owl-arrow gallery-property"
-              >
-                {/* <div class="carousel-item-b">
-                  <img src={fotito} alt="" width="100%" height="100%" />
-                </div>
-                <div class="carousel-item-b">
-                  <img
-                    src="https://hips.hearstapps.com/hmg-prod/images/casa-de-diseno-contemporaneo26-1637602658.jpg?crop=1xw:0.9066731141199227xh;center,top&resize=1200:*"
-                    alt=""
-                  />
-                </div>
-                <div class="carousel-item-b">
-                  <img src="img/slide-1.jpg" alt="" />
-                </div> */}
-              </div>
               <div class="row justify-content-between">
                 <div class="col-md-5 col-lg-4">
                   <div class="property-summary">
@@ -106,8 +106,7 @@ function Project() {
                         <li class="d-flex justify-content-between">
                           <strong>Area:</strong>
                           <span>
-                          {oneProject[0]?.area}m
-                            <sup>2</sup>
+                            {oneProject[0]?.area}m<sup>2</sup>
                           </span>
                         </li>
                         <li class="d-flex justify-content-between">
@@ -120,9 +119,7 @@ function Project() {
                         </li>
                         <li class="d-flex justify-content-between">
                           <strong>Garage:</strong>
-                          <span>
-                          {oneProject[0]?.garage}
-                          </span>
+                          <span>{oneProject[0]?.garage}</span>
                         </li>
                         {/* <li class="d-flex justify-content-between">
                           <strong>Beds:</strong>
@@ -150,11 +147,9 @@ function Project() {
                   </div>
                   <div class="property-description">
                     <p class="description color-text-a">
-                    {oneProject[0]?.description}.
+                      {oneProject[0]?.description}.
                     </p>
-                    <p class="description color-text-a no-margin">
-                     
-                    </p>
+                    <p class="description color-text-a no-margin"></p>
                   </div>
                 </div>
               </div>

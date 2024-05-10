@@ -1,15 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./Form.css";
 import { uid } from "uid";
-// import {
-//   // query,
-//   collection,
-//   onSnapshot,
-//   updateDoc,
-//   doc,
-//   addDoc,
-//   deleteDoc,
-// } from "firebase/firestore";
+
 import { db, uploadFile } from "../../firebase/credential";
 import {
   ref,
@@ -53,7 +45,7 @@ function Form() {
 
   const handleImg = async (e) => {
     try {
-      let url = await uploadFile(e);
+      let url = await uploadFile(e.target.files[0]);
       setImage(url);
     } catch (error) {
       console.log("Error image");
@@ -85,16 +77,36 @@ function Form() {
     setGarage(e.target.value);
   };
 
+  // const handleImgs = async (e) => {
+  //   try {
+  //     console.log("e==>",e);
+  //     let urls = await uploadFile(e);
+  //     setImages(urls);
+  //   } catch (error) {
+  //     console.log("Error image");
+  //   }
+  // };
+  // console.log('varias imagenes==>', images);
+
   const handleImgs = async (e) => {
     try {
       console.log("e==>",e);
-      let urls = await uploadFile(e);
+      const arrayImages=Object.entries(e.target.files)
+      console.log('ARRAY IMAGENES==>', typeof arrayImages);
+      console.log('ARRAY IMAGENES==>', arrayImages);
+      let urls =  await Promise.all(arrayImages.map(async e=>{
+        // console.log("cada imagen==>",e[1]);
+        return await uploadFile(e[1]) ;
+
+      }))
+      console.log(urls, "URLSSSSSSSSSS");
       setImages(urls);
     } catch (error) {
       console.log("Error image");
     }
   };
   console.log('varias imagenes==>', images);
+
 
   const handleYear = (e) => {
     setYear(e.target.value);

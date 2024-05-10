@@ -39,7 +39,12 @@ const id = uid()
   useEffect(() => {
     fetchUser();
   }, []);
-  console.log("*********proyectos*******************",projects);
+ 
+  const handledeleteProject = (project) => {
+    remove(ref(db, `/projects/${project.id}`));
+}
+
+ 
   return (
     <div>
       <section class="intro-single">
@@ -79,9 +84,11 @@ const id = uid()
             </div>
                 {projects.map((project, index)=>(
                     <div class="col-md-4" key={index}>
+                      <button className='del-btn' onClick={() => {handledeleteProject(project)}}>Delete</button>
               <div class="card-box-a card-shadow">
                 <div class="img-box-a">
                   <img src={project.image} alt="" class="img-a img-fluid" />
+                 
                 </div>
                 <div class="card-overlay">
                   <div class="card-overlay-a-content">
