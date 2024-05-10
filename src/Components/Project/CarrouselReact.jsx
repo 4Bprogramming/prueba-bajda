@@ -9,13 +9,13 @@ export default function CarrouselReact({images}) {
     console.log("imagenes carrousel", images)
     // arrayImages?.map((e, index)=>{console.log("eeeeee===>", e)})
     const createCarouselItemImage = (index, options = {}) => (
-        <div key={index}>
-            <img src={`${index}`} width="500px"/>
+        <div key={index} className="imagesCarousel">
+            <img src={`${index}`} width="300px" />
             {/* <p className="legend">Legend {index}</p> */}
         </div>
     );
     
-    const baseChildren = <div>{arrayImages?.map(createCarouselItemImage)}</div>;
+    const baseChildren = <div className='imgDonde'>{arrayImages?.map(createCarouselItemImage)}</div>;
     console.log('basechild', baseChildren);
 
   return (

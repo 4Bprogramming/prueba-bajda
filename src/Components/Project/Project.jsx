@@ -67,7 +67,9 @@ function Project() {
         <div class="container">
           <div class="row">
             <div class="col-sm-12">
+              <div className="project-place">
 <CarrouselReact  images = {oneProject[0]?.images} />
+</div>
 {/* 
 aca comienza */}
 {/* <div className="carousel1">
