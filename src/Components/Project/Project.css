@@ -26,8 +26,13 @@
 	height : 80%;
 	float: left;
 }
-.carousel-inner > .item > img,
-  .carousel-inner > .item > a > img {
-      width: 60%;
-      margin: auto;
-  }
+
+
+.CarouselBajda{
+	font-family: sans-serif;
+	text-align: center;
+}
+.crsl{
+	height: 700px;
+	width: 480px;
+}

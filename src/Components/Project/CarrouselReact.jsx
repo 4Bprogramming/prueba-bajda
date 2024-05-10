@@ -5,25 +5,30 @@ import { Carousel } from 'react-responsive-carousel';
 
 
 export default function CarrouselReact({images}) {
-    const arrayImages= [...images]
-    console.log("imagenes carrousel", arrayImages)
-
+    const arrayImages=  images
+    console.log("imagenes carrousel", images)
+    // arrayImages?.map((e, index)=>{console.log("eeeeee===>", e)})
+    const createCarouselItemImage = (index, options = {}) => (
+        <div key={index}>
+            <img src={`${index}`} width="500px"/>
+            {/* <p className="legend">Legend {index}</p> */}
+        </div>
+    );
+    
+    const baseChildren = <div>{arrayImages?.map(createCarouselItemImage)}</div>;
+    console.log('basechild', baseChildren);
 
   return (
-    <div>CarrouselReact
-           <Carousel>
-            {/* <> */}
+    <div className='CarouselBajda'>CarrouselReact
+           <Carousel className='crsl'>
+           
             {
-                arrayImages[0]?.map((e, index)=>{
-                <div>
-                    {/* <img src={e} alt="" key={index}  /> */}
-                    {/* <p className="legend">Legend 1</p>s */}
-                </div>
-
-                })
+                
+              baseChildren.props.children
+                
             }
 
-            {/* </> */}
+           
                 
             </Carousel>
     </div>
