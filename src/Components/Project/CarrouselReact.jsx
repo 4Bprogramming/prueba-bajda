@@ -11,7 +11,7 @@ export default function CarrouselReact({images}) {
     const createCarouselItemImage = (index, options = {}) => (
         <div key={index} className="imagesCarousel">
             <img src={`${index}`} width="300px" />
-            {/* <p className="legend">Legend {index}</p> */}
+
         </div>
     );
     
@@ -19,7 +19,7 @@ export default function CarrouselReact({images}) {
     console.log('basechild', baseChildren);
 
   return (
-    <div className='CarouselBajda'>CarrouselReact
+    <div className='CarouselBajda'>
            <Carousel className='crsl'>
            
             {

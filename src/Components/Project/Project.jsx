@@ -5,7 +5,7 @@ import "../lib/ionicons/css/ionicons.min.css";
 import "../lib/owlcarousel/assets/owl.carousel.min.css";
 import "../lib/bootstrap/css/bootstrap.min.css";
 import "../css/style.css";
-import './Project.css'
+import "./Project.css";
 import { db } from "../../firebase/credential";
 import {
   ref,
@@ -68,25 +68,8 @@ function Project() {
           <div class="row">
             <div class="col-sm-12">
               <div className="project-place">
-<CarrouselReact  images = {oneProject[0]?.images} />
-</div>
-{/* 
-aca comienza */}
-{/* <div className="carousel1">
-<div id="slider1">
-					  <figure>
-            {oneProject[0]?.images?.map((e, index) => (
-                <img src={e} alt="" key={index}  />
-              ))} 
-					  </figure>
-				</div>
-        </div> */}
-        {/* <Carrousell/> */}
-{/* 
-  aca termina          */}
-    {/* {oneProject[0]?.images?.map((e, index) => (
-                <img src={e} alt="" key={index} width="300px" />
-              ))} */}
+                <CarrouselReact images={oneProject[0]?.images} />
+              </div>
 
               <div class="row justify-content-between">
                 <div class="col-md-5 col-lg-4">

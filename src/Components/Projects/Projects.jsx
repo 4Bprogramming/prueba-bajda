@@ -6,7 +6,7 @@ import "../lib/owlcarousel/assets/owl.carousel.min.css";
 import "../lib/bootstrap/css/bootstrap.min.css";
 import "../css/style.css";
 
-import { db } from "../../firebase/credential";
+import { db, auth } from "../../firebase/credential";
 import {
   ref,
   set,
@@ -17,10 +17,11 @@ import {
 } from "firebase/database";
 import { uid } from "uid";
 import { Link } from "react-router-dom";
+import { GoogleAuthProvider, getAuth, signInWithRedirect, signInWithPopup } from "firebase/auth";
 
 function Projects() {
   const [projects, setProjects] = useState([]);
-const id = uid()
+  const id = uid();
 
   const fetchUser = () => {
     console.log("Fetching all Users");
@@ -39,12 +40,34 @@ const id = uid()
   useEffect(() => {
     fetchUser();
   }, []);
- 
+
   const handledeleteProject = (project) => {
     remove(ref(db, `/projects/${project.id}`));
+  };
+
+
+  const googleProvider = new GoogleAuthProvider();
+
+  const [value,setValue] = useState('')
+  const handleClick =()=>{
+      signInWithPopup(auth,googleProvider).then((data)=>{
+          setValue(data.user.email)
+          localStorage.setItem("email",data.user.email)
+      })
+  }
+
+  useEffect(()=>{
+      setValue(localStorage.getItem('email'))
+  })
+console.log(value, "aca alguna data")
+
+
+const logout =()=>{
+  localStorage.clear()
+  window.location.reload()
 }
 
- 
+
   return (
     <div>
       <section class="intro-single">
@@ -75,62 +98,75 @@ const id = uid()
           </div>
         </div>
       </section>
+      <button
+        variant="info"
+        size="sm"
+        type="submit"
+        onClick={handleClick}
+      >
+        Accede con Google
+      </button>
 
+      <button onClick={logout}>Logout</button>
       <section class="property-grid grid">
         <div class="container">
           <div class="row">
             <div class="col-sm-12">
               <div class="grid-option"></div>
             </div>
-                {projects.map((project, index)=>(
-                    <div class="col-md-4" key={index}>
-                      <button className='del-btn' onClick={() => {handledeleteProject(project)}}>Delete</button>
-              <div class="card-box-a card-shadow">
-                <div class="img-box-a">
-                  <img src={project.image} alt="" class="img-a img-fluid" />
-                 
-                </div>
-                <div class="card-overlay">
-                  <div class="card-overlay-a-content">
-                    <div class="card-header-a">
-                      <h2 class="card-title-a">
-                        <a href="#">{project.title}</a>
-                        
-                      </h2>
-                    </div>
-                    <div class="card-body-a">
-                      <Link to={`/project/${project.id}`} class="link-a">
-                        ver
-                        <span class="ion-ios-arrow-forward"></span>
-                      </Link>
-                    </div>
-                    <div class="card-footer-a">
-                      <ul class="card-info d-flex justify-content-around">
-                        <li>
-                          <h4 class="card-info-title">Area</h4>
-                          <span>
-                            {project.area}2
-                            <sup>2</sup>
-                          </span>
-                        </li>
-                        <li>
-                          <h4 class="card-info-title">Año</h4>
-                          <span>{project.year}</span>
-                        </li>
-                        <li>
-                          <h4 class="card-info-title">Ubicación</h4>
-                          <span>{project.place}</span>
-                        </li>
-                      </ul>
+            {projects.map((project, index) => (
+              <div class="col-md-4" key={index}>
+                {
+                    value === null ? null :  <button
+                    className="del-btn"
+                    onClick={() => {
+                      handledeleteProject(project);
+                    }}
+                  >
+                    Delete
+                  </button>
+                }
+               
+                <div class="card-box-a card-shadow">
+                  <div class="img-box-a">
+                    <img src={project.image} alt="" class="img-a img-fluid" />
+                  </div>
+                  <div class="card-overlay">
+                    <div class="card-overlay-a-content">
+                      <div class="card-header-a">
+                        <h2 class="card-title-a">
+                          <a href="#">{project.title}</a>
+                        </h2>
+                      </div>
+                      <div class="card-body-a">
+                        <Link to={`/project/${project.id}`} class="link-a">
+                          ver
+                          <span class="ion-ios-arrow-forward"></span>
+                        </Link>
+                      </div>
+                      <div class="card-footer-a">
+                        <ul class="card-info d-flex justify-content-around">
+                          <li>
+                            <h4 class="card-info-title">Area</h4>
+                            <span>
+                              {project.area}2<sup>2</sup>
+                            </span>
+                          </li>
+                          <li>
+                            <h4 class="card-info-title">Año</h4>
+                            <span>{project.year}</span>
+                          </li>
+                          <li>
+                            <h4 class="card-info-title">Ubicación</h4>
+                            <span>{project.place}</span>
+                          </li>
+                        </ul>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-                ))}
-
-
-
+            ))}
 
             {/* <div class="col-md-4">
               <div class="card-box-a card-shadow">
